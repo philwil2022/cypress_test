@@ -1,11 +1,19 @@
 /// <reference types="cypress" />
 
-it("Shifting Content Menu Elemnt Count", () => {
-  cy.visit("https://the-internet.herokuapp.com/");
+import { MainPage } from "../page-objects/main";
+import { ShiftingPage } from "../page-objects/shifting";
 
-  cy.get(":nth-child(39) > a").click();
+describe("TEST DE LOGIN", () => {
+  const mainPage = new MainPage();
+  const shiftingPage = new ShiftingPage();
 
-  cy.get('[href="/shifting_content/menu"]').click();
+  beforeEach(() => {
+    mainPage.navigate();
+    shiftingPage.clickShiftingContent();
+  });
 
-  cy.get("li").should("have.length", 5);
+  it("Shifting Content Menu Elemnt Count", () => {
+    shiftingPage.clickMenuElement();
+    shiftingPage.checkElement();
+  });
 });
