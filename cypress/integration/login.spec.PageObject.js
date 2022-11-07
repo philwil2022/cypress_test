@@ -1,16 +1,24 @@
 /// <reference types="cypress" />
 
+import { MainPage } from "../page-objects/main";
+import { LoginPage } from "../page-objects/login";
+import { WelcomePage } from "../page-objects/welcome";
+
 describe("TEST DE LOGIN", () => {
+  const loginPage = new LoginPage();
+  const mainPage = new MainPage();
+  const welcomePage = new WelcomePage();
+
   beforeEach(() => {
-    cy.visit("https://the-internet.herokuapp.com/");
-    cy.get(":nth-child(21) > a").click();
+    mainPage.navigate();
+    mainPage.clickLoginOption();
   });
 
   it("A valid user can login", () => {
-    cy.get("#username").type("tomsmith");
-    cy.get("#password").type("SuperSecretPassword!");
-    cy.get(".fa").click();
-    cy.get("#flash").contains("You logged into a secure area!");
+    loginPage.fillUser("tomsmith");
+    loginPage.fillPassword("SuperSecretPassword!");
+    loginPage.clickButtonLogin();
+    welcomePage.checkMessage("You logged into a secure area!");
   });
 
   it("An invalid password", () => {
