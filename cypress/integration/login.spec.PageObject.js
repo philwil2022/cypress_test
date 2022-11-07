@@ -22,23 +22,23 @@ describe("TEST DE LOGIN", () => {
   });
 
   it("An invalid password", () => {
-    cy.get("#username").type("tomsmith");
-    cy.get("#password").type("SSuperSecretPassword!");
-    cy.get(".fa").click();
-    cy.get("#flash").contains("Your password is invalid!");
+    loginPage.fillUser("tomsmith");
+    loginPage.fillPassword("SSuperSecretPassword!");
+    loginPage.clickButtonLogin();
+    welcomePage.checkMessage("Your password is invalid!");
   });
 
   it("An invalid username", () => {
-    cy.get("#username").type("tomjames");
-    cy.get("#password").type("SSuperSecretPassword!");
-    cy.get(".fa").click();
-    cy.get("#flash").contains("Your username is invalid!");
+    loginPage.fillUser("tomjames");
+    loginPage.fillPassword("SSuperSecretPassword!");
+    loginPage.clickButtonLogin();
+    welcomePage.checkMessage("Your username is invalid!");
   });
 
   it("Trying to log in with empty input fields", () => {
-    cy.get("#username").clear();
-    cy.get("#password").clear();
-    cy.get(".fa").click();
-    cy.get("#flash").contains("Your username is invalid!");
+    loginPage.clearUserField();
+    loginPage.clearPasswordField();
+    loginPage.clickButtonLogin();
+    welcomePage.checkMessage("Your username is invalid!");
   });
 });

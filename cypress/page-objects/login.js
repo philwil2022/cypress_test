@@ -10,4 +10,12 @@ export class LoginPage {
   clickButtonLogin() {
     cy.get(".fa").click();
   }
+
+  clearUserField() {
+    cy.get("#username").clear();
+  }
+
+  clearPasswordField() {
+    cy.get("#password").clear();
+  }
 }
